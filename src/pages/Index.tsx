@@ -14,6 +14,7 @@ interface Product {
   category: string;
   price: number;
   image: string;
+  images?: string[];
   description: string;
   weight: string;
   ingredients: string;
@@ -32,6 +33,12 @@ const products: Product[] = [
     category: 'Торты',
     price: 2500,
     image: '/img/3d8f9caa-ee38-4b28-b75c-589d1da2777e.jpg',
+    images: [
+      '/img/3d8f9caa-ee38-4b28-b75c-589d1da2777e.jpg',
+      '/img/0102c881-a526-4f87-b09e-db8a602b4315.jpg',
+      '/img/f7d91e07-7dc9-4ebf-b3ae-135db72491aa.jpg',
+      '/img/89776e47-f699-41c9-acfa-c60563a3e1b3.jpg'
+    ],
     description: 'Нежный шоколадный бисквит с кремом из бельгийского шоколада',
     weight: '1200г',
     ingredients: 'Мука пшеничная, масло сливочное, шоколад, яйца, сахар'
@@ -104,6 +111,7 @@ export default function Index() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('Все');
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [selectedImageIndex, setSelectedImageIndex] = useState<Record<number, number>>({});
 
   const addToCart = (product: Product) => {
     setCart((prev) => {
@@ -327,12 +335,56 @@ export default function Index() {
               key={product.id}
               className="overflow-hidden hover:shadow-xl transition-shadow animate-scale-in"
             >
-              <div className="relative h-64">
+              <div className="relative h-64 group">
                 <img
-                  src={product.image}
+                  src={product.images?.[selectedImageIndex[product.id] || 0] || product.image}
                   alt={product.name}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-all duration-300"
                 />
+                {product.images && product.images.length > 1 && (
+                  <>
+                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                      {product.images.map((_, idx) => (
+                        <button
+                          key={idx}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedImageIndex((prev) => ({ ...prev, [product.id]: idx }));
+                          }}
+                          className={`w-2 h-2 rounded-full transition-all ${
+                            (selectedImageIndex[product.id] || 0) === idx
+                              ? 'bg-white w-6'
+                              : 'bg-white/50 hover:bg-white/75'
+                          }`}
+                        />
+                      ))}
+                    </div>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedImageIndex((prev) => ({
+                          ...prev,
+                          [product.id]: ((prev[product.id] || 0) - 1 + product.images!.length) % product.images!.length
+                        }));
+                      }}
+                      className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/80 hover:bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                      <Icon name="ChevronLeft" size={20} />
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedImageIndex((prev) => ({
+                          ...prev,
+                          [product.id]: ((prev[product.id] || 0) + 1) % product.images!.length
+                        }));
+                      }}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/80 hover:bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                      <Icon name="ChevronRight" size={20} />
+                    </button>
+                  </>
+                )}
                 {product.vegan && (
                   <Badge className="absolute top-3 right-3 bg-muted">
                     <Icon name="Leaf" size={14} className="mr-1" />
