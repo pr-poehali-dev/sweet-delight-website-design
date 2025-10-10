@@ -1,11 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import Icon from '@/components/ui/icon';
 
 interface Product {
@@ -108,10 +106,22 @@ const categories = [
 ];
 
 export default function Index() {
+  const navigate = useNavigate();
   const [cart, setCart] = useState<CartItem[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('Все');
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState<Record<number, number>>({});
+
+  useEffect(() => {
+    const storedCart = localStorage.getItem('cart');
+    if (storedCart) {
+      setCart(JSON.parse(storedCart));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
 
   const addToCart = (product: Product) => {
     setCart((prev) => {
@@ -247,23 +257,15 @@ export default function Index() {
                         <span className="text-xl font-bold">{totalPrice} ₽</span>
                       </div>
 
-                      <div className="space-y-4">
-                        <div>
-                          <Label htmlFor="name">Имя</Label>
-                          <Input id="name" placeholder="Ваше имя" />
-                        </div>
-                        <div>
-                          <Label htmlFor="phone">Телефон</Label>
-                          <Input id="phone" placeholder="+7 (999) 999-99-99" />
-                        </div>
-                        <div>
-                          <Label htmlFor="address">Адрес доставки</Label>
-                          <Textarea id="address" placeholder="Улица, дом, квартира" />
-                        </div>
-                        <Button className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
-                          Оформить заказ
-                        </Button>
-                      </div>
+                      <Button 
+                        className="w-full bg-accent hover:bg-accent/90 text-accent-foreground"
+                        onClick={() => {
+                          setIsCartOpen(false);
+                          navigate('/checkout');
+                        }}
+                      >
+                        Перейти к оформлению
+                      </Button>
                     </div>
                   </>
                 )}
