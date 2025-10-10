@@ -415,7 +415,11 @@ export default function Index() {
 
       <section className="bg-secondary/50 py-16" id="about">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-serif font-bold text-center mb-12">Почему мы?</h2>
+          <h2 className="text-4xl font-serif font-bold text-center mb-6">О нашей кондитерской</h2>
+          <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-12">
+            Sweet Delight — это кондитерская премиум-класса, где каждый десерт создаётся с любовью и вниманием к деталям. 
+            Мы работаем с 2018 года и за это время приготовили более 10 000 тортов для наших любимых клиентов.
+          </p>
           <div className="grid md:grid-cols-3 gap-8">
             <Card>
               <CardContent className="p-8 text-center">
@@ -424,7 +428,7 @@ export default function Index() {
                 </div>
                 <h3 className="text-xl font-semibold mb-3">Ручная работа</h3>
                 <p className="text-muted-foreground">
-                  Каждый десерт создается вручную нашими мастерами-кондитерами
+                  Каждый десерт создается вручную нашими мастерами-кондитерами с 15-летним опытом
                 </p>
               </CardContent>
             </Card>
@@ -435,7 +439,7 @@ export default function Index() {
                 </div>
                 <h3 className="text-xl font-semibold mb-3">Премиум ингредиенты</h3>
                 <p className="text-muted-foreground">
-                  Используем только натуральные и качественные продукты
+                  Бельгийский шоколад, французское масло и натуральная ваниль из Мадагаскара
                 </p>
               </CardContent>
             </Card>
@@ -446,8 +450,172 @@ export default function Index() {
                 </div>
                 <h3 className="text-xl font-semibold mb-3">Всегда свежее</h3>
                 <p className="text-muted-foreground">
-                  Готовим в день заказа, без консервантов и заморозки
+                  Готовим в день заказа. Никаких консервантов, заморозки и полуфабрикатов
                 </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16" id="delivery">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-serif font-bold text-center mb-12">Доставка и оплата</h2>
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <Card>
+              <CardContent className="p-8">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <Icon name="Truck" size={24} className="text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold mb-3">Доставка</h3>
+                    <ul className="space-y-2 text-sm text-muted-foreground">
+                      <li>• Бесплатная доставка при заказе от 3000 ₽</li>
+                      <li>• По городу — 300 ₽</li>
+                      <li>• Доставка в день заказа при оформлении до 14:00</li>
+                      <li>• Доставляем с 10:00 до 22:00</li>
+                      <li>• Возможна доставка к определенному времени</li>
+                    </ul>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="p-8">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <Icon name="CreditCard" size={24} className="text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold mb-3">Оплата</h3>
+                    <ul className="space-y-2 text-sm text-muted-foreground">
+                      <li>• Наличными курьеру</li>
+                      <li>• Банковской картой при получении</li>
+                      <li>• Онлайн на сайте</li>
+                      <li>• Безналичный расчёт для юр. лиц</li>
+                      <li>• Предоплата 30% для индивидуальных заказов</li>
+                    </ul>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-secondary/50 py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-serif font-bold text-center mb-12">Отзывы наших клиентов</h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card>
+              <CardContent className="p-6">
+                <div className="flex gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Icon key={i} name="Star" size={16} className="text-yellow-500 fill-yellow-500" />
+                  ))}
+                </div>
+                <p className="text-sm text-muted-foreground mb-4">
+                  "Заказывала торт на день рождения мужа — все гости были в восторге! Очень вкусный, красивый и свежий. Доставили точно вовремя."
+                </p>
+                <p className="font-semibold">Анна К.</p>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="p-6">
+                <div className="flex gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Icon key={i} name="Star" size={16} className="text-yellow-500 fill-yellow-500" />
+                  ))}
+                </div>
+                <p className="text-sm text-muted-foreground mb-4">
+                  "Постоянно заказываю здесь капкейки для офиса. Качество всегда на высоте, коллеги в восторге. Рекомендую всем!"
+                </p>
+                <p className="font-semibold">Дмитрий П.</p>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="p-6">
+                <div className="flex gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Icon key={i} name="Star" size={16} className="text-yellow-500 fill-yellow-500" />
+                  ))}
+                </div>
+                <p className="text-sm text-muted-foreground mb-4">
+                  "Делали свадебный торт — это было произведение искусства! Не только красиво, но и невероятно вкусно. Спасибо огромное!"
+                </p>
+                <p className="font-semibold">Елена М.</p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16" id="contact">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-serif font-bold text-center mb-12">Контакты</h2>
+          <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+            <div className="space-y-6">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <Icon name="Phone" size={24} className="text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-semibold mb-1">Телефон</h3>
+                  <p className="text-muted-foreground">+7 (999) 123-45-67</p>
+                  <p className="text-sm text-muted-foreground">Ежедневно с 9:00 до 21:00</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <Icon name="Mail" size={24} className="text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-semibold mb-1">Email</h3>
+                  <p className="text-muted-foreground">info@sweetdelight.ru</p>
+                  <p className="text-sm text-muted-foreground">Ответим в течение 1 часа</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <Icon name="MapPin" size={24} className="text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-semibold mb-1">Адрес</h3>
+                  <p className="text-muted-foreground">г. Москва, ул. Пушкина, д. 10</p>
+                  <p className="text-sm text-muted-foreground">Самовывоз: пн-вс 10:00-20:00</p>
+                </div>
+              </div>
+            </div>
+            <Card>
+              <CardContent className="p-6">
+                <h3 className="text-xl font-semibold mb-4">Напишите нам</h3>
+                <form className="space-y-4">
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Ваше имя"
+                      className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="email"
+                      placeholder="Email"
+                      className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                    />
+                  </div>
+                  <div>
+                    <textarea
+                      placeholder="Сообщение"
+                      rows={4}
+                      className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary resize-none"
+                    />
+                  </div>
+                  <Button className="w-full bg-primary hover:bg-primary/90">
+                    Отправить
+                  </Button>
+                </form>
               </CardContent>
             </Card>
           </div>
